@@ -1,0 +1,6 @@
+---
+profile: ingest-prod
+resources:
+    QR_Transaction_Refund:
+        path: QR_Transaction_Refund
+        provider: source
