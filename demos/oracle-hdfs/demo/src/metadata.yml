@@ -13,8 +13,8 @@ providers:
         port: 1521
         sid: offline
         database: MMSOFF
-        username: sys as sysdba
-        password: qazwsxedcrfv
+        username: books_admin
+        password: MyPassword
         read:
             cache: True
             repartition: 4
@@ -28,20 +28,16 @@ providers:
             repartition: 4
             coalesce: 2
             options:
-                partitionBy: 
-                - date
                 mode: append
-            
+
 engines:
     spark:
         context: spark
         config:
             master: spark://spark-master:7077
             jobname: 'default'
-            packages:
-                - mysql:mysql-connector-java:8.0.12
             jars:
-                - /home/jovyan/demo/jars/ojdbc6-11.2.0.3.jar
+                 - 'http://www.datanucleus.org/downloads/maven2/oracle/ojdbc6/11.2.0.3/ojdbc6-11.2.0.3.jar'
 
 loggers:
     stream:
@@ -49,18 +45,13 @@ loggers:
         severity: info
 
 ---
-profile: test
-resources:
-    in:
-        path: actor
-        provider: source
-    out:
-        path: actor
-        provider: ingest
-        # override provider settings
-        write:
-            option:
-                partitionBy: 
-                    - date
-                mode: append
+profile: production
+engines:
+ spark:
+     context: spark
+     config:
+       master: spark://bigdata-m.teko.vn:17077
+       jobname: 'logistics-prod'
+       packages:
+       - mysql:mysql-connector-java:8.0.12
                 

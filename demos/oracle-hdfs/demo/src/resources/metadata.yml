@@ -1,6 +1,18 @@
 ---
-profile: ingest-prod
+profile: default
 resources:
-    QR_Transaction_Refund:
-        path: QR_Transaction_Refund
+    QR_Transaction:
+        path: QR_Transaction
         provider: source
+        filter:
+            policy: date
+            column: PAY_DATE
+#            date: '2018-06-11'
+    QR_Transaction_Detail:
+        path: QR_Transaction_Detail
+        provider: source
+        filter:
+            policy: date
+            column: CREATED_DATE
+#            window: -7
+#             date: '2018-06-11'
