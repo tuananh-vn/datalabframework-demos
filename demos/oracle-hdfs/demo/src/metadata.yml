@@ -2,19 +2,16 @@
 profile: default
 
 # new feature - user variables
-variables:
-    a: 5
-    b: '{{ "hello"|env("myvar") }}'
     
 providers:
     source:
         service: oracle
-        hostname: 172.16.60.18
+        hostname: oracle
         port: 1521
-        sid: offline
-        database: MMSOFF
-        username: books_admin
-        password: MyPassword
+        sid: xe
+        database: system
+        username: system
+        password: oracle
         read:
             cache: True
             repartition: 4

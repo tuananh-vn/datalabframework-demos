@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  oracle:
+    image: sath89/oracle-12c
+    ports:
+      - 1521:1521
+      #- 8080:8080
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+    networks:
+     - datalabframework
+
+networks:
+  datalabframework:
+    name: datalabframework
+    driver: bridge
+    external: true
